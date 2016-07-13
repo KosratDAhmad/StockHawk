@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -221,6 +222,18 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursorAdapter.swapCursor(data);
         mCursor = data;
+        updateEmptyView();
+    }
+
+    private void updateEmptyView() {
+        if(mCursorAdapter.getItemCount() == 0){
+            TextView tv = (TextView) findViewById(R.id.recycler_stock_empty);
+            if(null != tv) {
+                if (!isConnected) {
+                    tv.setText(getString(R.string.empty_stock_list_no_network));
+                }
+            }
+        }
     }
 
     @Override
