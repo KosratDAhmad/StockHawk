@@ -41,6 +41,15 @@
             android:authorities="com.sam_chordas.android.stockhawk.data.QuoteProvider"
             android:name="com.sam_chordas.android.stockhawk.data.generated.QuoteProvider"
             android:exported="false"/>
+        <!-- Shows a toast whenever an invalid stock symbol is added -->
+        <receiver
+            android:name=".service.InvalidStockSymbol"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.sam_chordas.android.stockhawk.service.InvalidStockSymbol" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

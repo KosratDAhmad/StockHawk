@@ -38,7 +38,12 @@ public class Utils {
                 if (count == 1) {
                     jsonObject = jsonObject.getJSONObject("results")
                             .getJSONObject("quote");
-                    batchOperations.add(buildBatchOperation(jsonObject));
+                    // invalid stock symbol
+                    if(jsonObject.getString("Bid").equals("null") || jsonObject.getString("Bid") == null){
+                        return null;
+                    }else{
+                        batchOperations.add(buildBatchOperation(jsonObject));
+                    }
                 } else {
                     resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
