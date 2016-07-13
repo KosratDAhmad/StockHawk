@@ -1,10 +1,15 @@
 package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.service.StockTaskService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +26,7 @@ public class Utils {
 
     public static boolean showPercent = true;
 
-    public static ArrayList quoteJsonToContentVals(String JSON) {
+    public static ArrayList quoteJsonToContentVals(String JSON, Context context) {
         ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
         JSONObject jsonObject = null;
         JSONArray resultsArray = null;
@@ -45,8 +50,10 @@ public class Utils {
                     }
                 }
             }
+            Utils.setStockStatus(context, StockTaskService.STOCK_STATUS_OK);
         } catch (JSONException e) {
             Log.e(LOG_TAG, "String to JSON failed: " + e);
+            setStockStatus(context, StockTaskService.STOCK_STATUS_SERVER_INVALID);
         }
         return batchOperations;
     }
@@ -94,5 +101,23 @@ public class Utils {
             e.printStackTrace();
         }
         return builder.build();
+    }
+
+    /**
+     * Sets the stock status into shared preference.  This function should not be called from
+     * the UI thread because it uses commit to write to the shared preferences.
+     *
+     * @param c           Context to get the PreferenceManager from.
+     * @param stockStatus The IntDef value to set
+     */
+    static public void setStockStatus(Context c, @StockTaskService.StockStatus int stockStatus) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        sp.edit().putInt(c.getString(R.string.pref_stock_status_key), stockStatus).commit();
+    }
+
+    @SuppressWarnings("ResourceType")
+    public static @StockTaskService.StockStatus int getStockStatus(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getInt(context.getString(R.string.pref_stock_status_key), StockTaskService.STOCK_STATUS_UNKNOWN);
     }
 }

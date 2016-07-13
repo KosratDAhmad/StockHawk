@@ -6,6 +6,7 @@ import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.RemoteException;
+import android.support.annotation.IntDef;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
@@ -20,6 +21,8 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.net.URLEncoder;
 
 /**
@@ -34,6 +37,16 @@ public class StockTaskService extends GcmTaskService {
     private Context mContext;
     private StringBuilder mStoredSymbols = new StringBuilder();
     private boolean isUpdate;
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({STOCK_STATUS_OK, STOCK_STATUS_SERVER_DOWN, STOCK_STATUS_SERVER_INVALID, STOCK_STATUS_UNKNOWN})
+    public @interface StockStatus {
+    }
+
+    public static final int STOCK_STATUS_OK = 0;
+    public static final int STOCK_STATUS_SERVER_DOWN = 1;
+    public static final int STOCK_STATUS_SERVER_INVALID = 2;
+    public static final int STOCK_STATUS_UNKNOWN = 3;
 
     public StockTaskService() {
     }
@@ -108,6 +121,7 @@ public class StockTaskService extends GcmTaskService {
         urlStringBuilder.append("&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables."
                 + "org%2Falltableswithkeys&callback=");
 
+        Log.i("api", "onRunTask: " + urlStringBuilder.toString());
         String urlString;
         String getResponse;
         int result = GcmNetworkManager.RESULT_FAILURE;
@@ -126,12 +140,14 @@ public class StockTaskService extends GcmTaskService {
                                 null, null);
                     }
                     mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
-                            Utils.quoteJsonToContentVals(getResponse));
+                            Utils.quoteJsonToContentVals(getResponse, mContext));
+
                 } catch (RemoteException | OperationApplicationException e) {
                     Log.e(LOG_TAG, "Error applying batch insert", e);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                Utils.setStockStatus(mContext, STOCK_STATUS_SERVER_DOWN);
             }
         }
 
