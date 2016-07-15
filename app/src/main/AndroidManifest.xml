@@ -47,7 +47,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.sam_chordas.android.stockhawk.service.InvalidStockSymbol" />
+                <action android:name="com.sam_chordas.android.stockhawk.service.InvalidStockReceiver" />
             </intent-filter>
         </receiver>
         <activity android:name=".ui.StockDetail"
