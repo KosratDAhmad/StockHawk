@@ -43,13 +43,18 @@
             android:exported="false"/>
         <!-- Shows a toast whenever an invalid stock symbol is added -->
         <receiver
-            android:name=".service.InvalidStockSymbol"
+            android:name=".service.InvalidStockReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.sam_chordas.android.stockhawk.service.InvalidStockSymbol" />
             </intent-filter>
         </receiver>
+        <activity android:name=".ui.StockDetail"
+            android:parentActivityName=".ui.MyStocksActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MyStocksActivity"/>
+            </activity>
     </application>
 
 </manifest>

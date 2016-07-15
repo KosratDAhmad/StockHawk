@@ -18,4 +18,16 @@
     <string name="empty_stock_list_server_error">No stock information available. The server is not returning valid data. Please check for an updated version of Stock Hawk.</string>
     <string name="pref_stock_status_key" translatable="false">stock-status</string>
     <string name="invalid_stock_symbol">Stock symbol not found</string>
+
+    <string name="symbol_detail" translatable="false" formatted="true">%s Detail</string>
+
+    <!--stock detail extra titles -->
+    <string name="stock_detail_extra_symbol">Stock Symbol</string>
+    <string name="stock_detail_extra_name">Stock Name</string>
+    <string name="stock_detail_extra_first">First Trade</string>
+    <string name="stock_detail_extra_last">Last Trade</string>
+    <string name="stock_detail_extra_currency">Currency</string>
+    <string name="stock_detail_extra_bid">Bid Price</string>
+
+    <string name="pref_historic_status_key" translatable="false">historic-status</string>
 </resources>

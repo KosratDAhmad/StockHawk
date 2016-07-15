@@ -147,7 +147,7 @@ public class StockTaskService extends GcmTaskService {
                         mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, batchOperations);
                     }else{
                         Intent intent = new Intent();
-                        intent.setAction("com.sam_chordas.android.stockhawk.service.InvalidStockSymbol");
+                        intent.setAction("com.sam_chordas.android.stockhawk.service.InvalidStockReceiver");
                         mContext.sendBroadcast(intent);
                     }
 
