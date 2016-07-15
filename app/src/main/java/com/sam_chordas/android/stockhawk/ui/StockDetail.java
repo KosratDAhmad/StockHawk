@@ -1,6 +1,8 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -8,11 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.db.chart.Tools;
 import com.db.chart.model.LineSet;
 import com.db.chart.view.AxisController;
+import com.db.chart.view.ChartView;
 import com.db.chart.view.LineChartView;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
+import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.sam_chordas.android.stockhawk.service.HistoricData.HistoricData;
 import com.sam_chordas.android.stockhawk.service.HistoricData.StockMeta;
 import com.sam_chordas.android.stockhawk.service.HistoricData.StockSymbol;
@@ -80,29 +85,52 @@ public class StockDetail extends AppCompatActivity implements HistoricData.Histo
     public void onSuccess(StockMeta stockMeta) {
 
         stockName.setText(stockMeta.getStockName());
-        firstTrade.setText(stockMeta.getFirstTrade());
-        lastTrade.setText(stockMeta.getLastTrade());
+        firstTrade.setText(Utils.convertDate(stockMeta.getFirstTrade()));
+        lastTrade.setText(Utils.convertDate(stockMeta.getLastTrade()));
         currency.setText(stockMeta.getCurrency());
 
         LineSet dataset = new LineSet();
         ArrayList<StockSymbol> stockSymbols = stockMeta.getStockSymbols();
 
+        int minValue = 0;
+        int maxValue = 0;
         for (int i = 0; i < stockSymbols.size(); i++) {
-            String label = stockSymbols.get(i).getDate();
+            String label = Utils.convertDate(stockSymbols.get(i).getDate());
             float value = stockSymbols.get(i).getClose();
+            if (value > maxValue) maxValue = (int) value;
             dataset.addPoint(label, value);
         }
 
         dataset.setColor(Color.parseColor("#758cbb"))
-                .setFill(Color.parseColor("#2d374c"))
-                .setDotsColor(Color.parseColor("#758cbb"))
-                .setThickness(4)
-                .setDashed(new float[]{10f, 10f})
-                .beginAt(5);
+                .setThickness(5)
+                .setSmooth(true)
+                .beginAt(1);
+
+        Paint thresPaint = new Paint();
+        thresPaint.setColor(Color.parseColor("#0079ae"));
+        thresPaint.setStyle(Paint.Style.STROKE);
+        thresPaint.setAntiAlias(true);
+        thresPaint.setStrokeWidth(Tools.fromDpToPx(.75f));
+        thresPaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
+
+        Paint gridPaint = new Paint();
+        gridPaint.setColor(Color.GRAY);
+        gridPaint.setStyle(Paint.Style.STROKE);
+        gridPaint.setAntiAlias(true);
+        gridPaint.setStrokeWidth(Tools.fromDpToPx(.75f));
+
         lineChart.addData(dataset);
-        lineChart.setAxisThickness(3);
-        lineChart.setXLabels(AxisController.LabelPosition.OUTSIDE);
-        lineChart.setYLabels(AxisController.LabelPosition.INSIDE);
+
+        lineChart.setAxisThickness(3)
+                .setAxisColor(Color.GRAY)
+                .setAxisBorderValues(minValue, maxValue * 2)
+                .setXLabels(AxisController.LabelPosition.NONE)
+                .setYLabels(AxisController.LabelPosition.NONE)
+                .setXAxis(false)
+                .setYAxis(false)
+                .setGrid(ChartView.GridType.FULL, 5, 5, gridPaint)
+                .setValueThreshold(80f, 80f, thresPaint);
+
         lineChart.show();
     }
 

@@ -3,6 +3,8 @@ package com.sam_chordas.android.stockhawk.rest;
 import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -124,5 +126,24 @@ public class Utils {
     public static @StockTaskService.StockStatus int getStockStatus(Context context){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         return sp.getInt(context.getString(R.string.pref_stock_status_key), StockTaskService.STOCK_STATUS_UNKNOWN);
+    }
+    //Checks if network is available or not
+    public static boolean isNetworkAvailable(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+    }
+
+    //Converts Date
+    public static String convertDate(String inputDate){
+        StringBuilder outputFormattedDate = new StringBuilder();
+        outputFormattedDate.append(inputDate.substring(6))
+                .append("/")
+                .append(inputDate.substring(4,6))
+                .append("/")
+                .append(inputDate.substring(2, 4));
+        return outputFormattedDate.toString();
     }
 }

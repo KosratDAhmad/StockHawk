@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:columnCount="2">
+    app:columnCount="1"
+    android:padding="@dimen/activity_horizontal_margin">
 
     <com.db.chart.view.LineChartView
         android:id="@+id/linechart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_columnWeight="1"
-        app:layout_columnSpan="2"
-        app:layout_rowWeight="1"/>
+        app:layout_rowWeight="1"
+        app:layout_gravity="center"
+        android:gravity="center"/>
 
 </android.support.v7.widget.GridLayout>
