@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.db.chart.Tools;
 import com.db.chart.model.LineSet;
 import com.db.chart.view.AxisController;
 import com.db.chart.view.LineChartView;
@@ -102,17 +101,8 @@ public class StockDetail extends AppCompatActivity implements HistoricData.Histo
                 .beginAt(5);
         lineChart.addData(dataset);
         lineChart.setAxisThickness(3);
-        lineChart.addData(dataset);
         lineChart.setXLabels(AxisController.LabelPosition.OUTSIDE);
         lineChart.setYLabels(AxisController.LabelPosition.INSIDE);
-
-        lineChart.setBorderSpacing(Tools.fromDpToPx(15))
-                .setAxisBorderValues(0, 20)
-                .setYLabels(AxisController.LabelPosition.NONE)
-                .setLabelsColor(Color.parseColor("#6a84c3"))
-                .setXAxis(false)
-                .setYAxis(false);
-
         lineChart.show();
     }
 
