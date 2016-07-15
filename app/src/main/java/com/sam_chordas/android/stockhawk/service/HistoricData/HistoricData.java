@@ -55,13 +55,14 @@ public class HistoricData {
 
     //to indicate errors encountered.
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({STATUS_OK, STATUS_ERROR_JSON, STATUS_ERROR_SERVER})
+    @IntDef({STATUS_OK, STATUS_ERROR_JSON, STATUS_ERROR_SERVER, STATUS_ERROR_NO_NETWORK})
     public @interface HistoricalDataStatuses {
     }
 
     public static final int STATUS_OK = 0;
     public static final int STATUS_ERROR_JSON = 1;
     public static final int STATUS_ERROR_SERVER = 2;
+    public static final int STATUS_ERROR_NO_NETWORK = 3;
 
     public HistoricData(Context context, HistoricCallback callback) {
         mContext = context;
@@ -144,6 +145,7 @@ public class HistoricData {
         }
     }
 
+    @SuppressWarnings("ResourceType")
     public void setHistoricalDataStatus(@HistoricalDataStatuses int status) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         sp.edit().putInt(mContext.getString(R.string.pref_historic_status_key), status).commit();

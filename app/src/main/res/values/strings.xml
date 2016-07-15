@@ -30,4 +30,15 @@
     <string name="stock_detail_extra_bid">Bid Price</string>
 
     <string name="pref_historic_status_key" translatable="false">historic-status</string>
+
+    <string name="no_data_show">Can\'t show you data over time!</string>
+    <string name="retry">RETRY</string>
+    <string name="empty_view_text">Stocks Data not available!</string>
+    <string name="data_error_json">Looks like it\'s our fault!</string>
+    <string name="data_no_internet">Internet Connection is required!</string>
+    <string name="data_error_parse">Unprecedented errors have happened!</string>
+    <string name="data_unknown_error">Can\'t identify the problem here!</string>
+    <string name="data_server_down">The Yahoo! Server is not responding properly!</string>
+    <string name="data_no_error">No errors!</string>
+
 </resources>

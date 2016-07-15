@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:columnCount="1"
     android:padding="@dimen/activity_horizontal_margin">
 
     <com.db.chart.view.LineChartView
         android:id="@+id/linechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_columnWeight="1"
-        app:layout_rowWeight="1"
-        app:layout_gravity="center"
         android:gravity="center"/>
 
-</android.support.v7.widget.GridLayout>
+    <TextView
+        android:id="@+id/empty_detail_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_show"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+</FrameLayout>
