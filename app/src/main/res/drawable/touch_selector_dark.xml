@@ -15,5 +15,5 @@
 
     <!-- Default, "just hangin' out" state.  This is part of
          ActionBarCompat -->
-    <item android:drawable="@color/white" />
+    <item android:drawable="@color/black" />
 </selector>
