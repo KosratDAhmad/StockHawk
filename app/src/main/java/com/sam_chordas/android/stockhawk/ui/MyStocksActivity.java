@@ -1,6 +1,8 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -36,6 +38,7 @@ import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.sam_chordas.android.stockhawk.service.StockIntentService;
 import com.sam_chordas.android.stockhawk.service.StockTaskService;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
+import com.sam_chordas.android.stockhawk.widget.DetailWidgetProvider;
 
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -83,12 +86,12 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
         View emptyView = findViewById(R.id.recycler_stock_empty);
-        mCursorAdapter = new QuoteCursorAdapter(this, null,emptyView);
+        mCursorAdapter = new QuoteCursorAdapter(this, null, emptyView);
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
                 new RecyclerViewItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-                        if(mCursor.moveToPosition(position)){
+                        if (mCursor.moveToPosition(position)) {
                             Intent intent = new Intent(MyStocksActivity.this, StockDetail.class);
                             intent.putExtra(QuoteColumns.SYMBOL,
                                     mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
@@ -229,15 +232,27 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         mCursorAdapter.swapCursor(data);
         mCursor = data;
         updateEmptyView();
+        updateWidget();
+    }
+
+    private void updateWidget() {
+        Intent intent = new Intent(this, DetailWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        ComponentName name = new ComponentName(this, DetailWidgetProvider.class);
+        int [] ids = AppWidgetManager.getInstance(this).getAppWidgetIds(name);
+
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
     }
 
     private void updateEmptyView() {
-        if(mCursorAdapter.getItemCount() == 0){
+        if (mCursorAdapter.getItemCount() == 0) {
             TextView tv = (TextView) findViewById(R.id.recycler_stock_empty);
-            if(null != tv) {
+            if (null != tv) {
                 int message = R.string.empty_stock_list;
                 @StockTaskService.StockStatus int status = Utils.getStockStatus(mContext);
-                switch (status){
+                switch (status) {
                     case StockTaskService.STOCK_STATUS_SERVER_DOWN:
                         message = R.string.empty_stock_list_server_down;
                         break;

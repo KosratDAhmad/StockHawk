@@ -40,5 +40,7 @@
     <string name="data_unknown_error">Can\'t identify the problem here!</string>
     <string name="data_server_down">The Yahoo! Server is not responding properly!</string>
     <string name="data_no_error">No errors!</string>
+    <string name="widget_title">Stock Hawk</string>
+    <string name="title_widget_detail">Stock Hawk Detail</string>
 
 </resources>
