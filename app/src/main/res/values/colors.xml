@@ -8,6 +8,7 @@
   <color name="white">#ffffff</color>
   <color name="black">#000000</color>
   <color name="grey">#646464</color>
+  <color name="dark_grey">#ff303030</color>
 
   <!-- the activated state color -->
   <color name="activated">#646464</color>
