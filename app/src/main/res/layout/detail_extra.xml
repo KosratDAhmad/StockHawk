@@ -24,8 +24,10 @@
         android:gravity="center_vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
-        app:layout_gravity="fill"
-        tools:text="FB" />
+        app:layout_gravity="fill|end"
+        tools:text="FB"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -44,7 +46,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
         app:layout_gravity="fill"
-        tools:text="Facebook Inc." />
+        tools:text="Facebook Inc."
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -63,7 +67,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
         app:layout_gravity="fill"
-        tools:text="29/6/2016" />
+        tools:text="29/6/2016"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -82,7 +88,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
         app:layout_gravity="fill"
-        tools:text="29/6/2016" />
+        tools:text="29/6/2016"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -101,7 +109,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
         app:layout_gravity="fill"
-        tools:text="USD" />
+        tools:text="USD" app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -120,6 +129,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/black"
         app:layout_gravity="fill"
-        tools:text="214.06" />
+        tools:text="214.06"
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"/>
 
 </android.support.v7.widget.GridLayout>

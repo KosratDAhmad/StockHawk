@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin">
@@ -9,13 +8,13 @@
         android:id="@+id/linechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/empty_detail_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_data_show"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:text="@string/no_data_show"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </FrameLayout>
