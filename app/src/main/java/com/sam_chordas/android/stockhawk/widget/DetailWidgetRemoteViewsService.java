@@ -1,6 +1,5 @@
 package com.sam_chordas.android.stockhawk.widget;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Binder;
@@ -93,9 +92,19 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                                 R.drawable.percent_change_pill_red);
                     }
 
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-//                        setRemoteContentDescription(views, description);
-//                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                        views.setContentDescription(R.id.widget_stock_symbol,
+                                getString(R.string.stock_symbol_content_description) + " "+symbol);
+                        views.setContentDescription(R.id.widget_bid_price,
+                                getString(R.string.bid_price_content_description) + " "+bid);
+                        if (Utils.showPercent) {
+                            views.setContentDescription(R.id.widget_change,
+                                    getString(R.string.change_content_description) + " "+percentChange);
+                        } else {
+                            views.setContentDescription(R.id.widget_change,
+                                    getString(R.string.change_content_description) + " "+change);
+                        }
+                    }
 
                     final Intent fillInIntent = new Intent();
                     fillInIntent.putExtra(QuoteColumns.SYMBOL, data.getString(data.getColumnIndex(QuoteColumns.SYMBOL)));
@@ -104,11 +113,6 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
                 }
                 return views;
-            }
-
-            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
-            private void setRemoteContentDescription(RemoteViews views, String description) {
-//                views.setContentDescription(R.id.widget_icon, description);
             }
 
             @Override

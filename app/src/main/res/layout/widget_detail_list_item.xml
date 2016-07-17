@@ -8,6 +8,9 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:id="@+id/widget_list_item"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:background="@drawable/touch_selector_white">
 
     <TextView

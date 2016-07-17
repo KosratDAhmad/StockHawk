@@ -43,4 +43,13 @@
     <string name="widget_title">Stock Hawk</string>
     <string name="title_widget_detail">Stock Hawk Detail</string>
 
+    <!-- content description-->
+    <string name="stock_symbol_content_description">Stock Symbol</string>
+    <string name="bid_price_content_description">Bid price</string>
+    <string name="change_content_description">Change </string>
+    <string name="change_up_content_description">Plus </string>
+    <string name="change_down_content_description">Minus </string>
+    <string name="graph_content_description">Graph showing prices of the stock over time!</string>
+    <string name="add_stock_content_description">Add new stock symbol</string>
+
 </resources>

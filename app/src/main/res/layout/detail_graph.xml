@@ -8,7 +8,8 @@
         android:id="@+id/linechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:gravity="center"
+        android:contentDescription="@string/graph_content_description"/>
 
     <TextView
         android:id="@+id/empty_detail_view"
