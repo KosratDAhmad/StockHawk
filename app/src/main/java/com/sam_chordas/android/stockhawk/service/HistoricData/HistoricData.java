@@ -123,7 +123,7 @@ public class HistoricData {
                 JSONObject singleObject = series_data.getJSONObject(i);
                 String date = singleObject.getString(JSON_DATE);
                 double close = singleObject.getDouble(JSON_CLOSE);
-                mStockSymbols.add(new StockSymbol(date, (float)close));
+                mStockSymbols.add(new StockSymbol(date, (float) close));
             }
 
             JSONObject meta_data = mainObject.getJSONObject(JSON_META);
@@ -135,7 +135,7 @@ public class HistoricData {
 
             mStockMeta = new StockMeta(companyName, firstTrade, lastTrade, currency, previousClosePrice, mStockSymbols);
 
-            if(mCallback != null){
+            if (mCallback != null) {
                 setHistoricalDataStatus(STATUS_OK);
             }
 

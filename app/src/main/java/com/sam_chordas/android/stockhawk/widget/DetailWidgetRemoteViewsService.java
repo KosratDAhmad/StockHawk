@@ -68,7 +68,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 }
                 RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_detail_list_item);
 
-                if(data.moveToPosition(position)) {
+                if (data.moveToPosition(position)) {
 
                     String symbol = data.getString(data.getColumnIndex(QuoteColumns.SYMBOL));
                     String bid = data.getString(data.getColumnIndex(QuoteColumns.BIDPRICE));
@@ -79,9 +79,9 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                     views.setTextViewText(R.id.widget_bid_price, bid);
 
                     if (Utils.showPercent) {
-                        views.setTextViewText(R.id.widget_change,percentChange);
+                        views.setTextViewText(R.id.widget_change, percentChange);
                     } else {
-                        views.setTextViewText(R.id.widget_change,change);
+                        views.setTextViewText(R.id.widget_change, change);
                     }
 
                     if (data.getInt(data.getColumnIndex(QuoteColumns.ISUP)) == 1) {
@@ -94,15 +94,15 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
                         views.setContentDescription(R.id.widget_stock_symbol,
-                                getString(R.string.stock_symbol_content_description) + " "+symbol);
+                                getString(R.string.stock_symbol_content_description) + " " + symbol);
                         views.setContentDescription(R.id.widget_bid_price,
-                                getString(R.string.bid_price_content_description) + " "+bid);
+                                getString(R.string.bid_price_content_description) + " " + bid);
                         if (Utils.showPercent) {
                             views.setContentDescription(R.id.widget_change,
-                                    getString(R.string.change_content_description) + " "+percentChange);
+                                    getString(R.string.change_content_description) + " " + percentChange);
                         } else {
                             views.setContentDescription(R.id.widget_change,
-                                    getString(R.string.change_content_description) + " "+change);
+                                    getString(R.string.change_content_description) + " " + change);
                         }
                     }
 

@@ -19,7 +19,7 @@
     <string name="pref_stock_status_key" translatable="false">stock-status</string>
     <string name="invalid_stock_symbol">Stock symbol not found</string>
 
-    <string name="symbol_detail" translatable="false" formatted="true">%s Detail</string>
+    <string name="symbol_detail" formatted="true" translatable="false">%s Detail</string>
 
     <!--stock detail extra titles -->
     <string name="stock_detail_extra_symbol">Stock Symbol</string>
@@ -47,8 +47,6 @@
     <string name="stock_symbol_content_description">Stock Symbol</string>
     <string name="bid_price_content_description">Bid price</string>
     <string name="change_content_description">Change </string>
-    <string name="change_up_content_description">Plus </string>
-    <string name="change_down_content_description">Minus </string>
     <string name="graph_content_description">Graph showing prices of the stock over time!</string>
     <string name="add_stock_content_description">Add new stock symbol</string>
 

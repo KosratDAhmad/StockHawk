@@ -13,6 +13,6 @@ import com.sam_chordas.android.stockhawk.R;
 public class InvalidStockReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, context.getString(R.string.invalid_stock_symbol),Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(R.string.invalid_stock_symbol), Toast.LENGTH_LONG).show();
     }
 }

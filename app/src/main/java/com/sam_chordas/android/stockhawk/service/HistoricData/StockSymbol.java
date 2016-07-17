@@ -8,7 +8,7 @@ public class StockSymbol {
     private String mDate;
     private float mClose;
 
-    public StockSymbol(String date, float close){
+    public StockSymbol(String date, float close) {
         mDate = date;
         mClose = close;
     }

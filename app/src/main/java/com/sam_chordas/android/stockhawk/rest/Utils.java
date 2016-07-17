@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
@@ -24,8 +23,6 @@ import java.util.ArrayList;
  */
 public class Utils {
 
-    private static String LOG_TAG = Utils.class.getSimpleName();
-
     public static boolean showPercent = true;
 
     public static ArrayList quoteJsonToContentVals(String JSON, Context context) {
@@ -41,9 +38,9 @@ public class Utils {
                     jsonObject = jsonObject.getJSONObject("results")
                             .getJSONObject("quote");
                     // invalid stock symbol
-                    if(jsonObject.getString("Bid").equals("null") || jsonObject.getString("Bid") == null){
+                    if (jsonObject.getString("Bid").equals("null") || jsonObject.getString("Bid") == null) {
                         return null;
-                    }else{
+                    } else {
                         batchOperations.add(buildBatchOperation(jsonObject));
                     }
                 } else {
@@ -59,7 +56,7 @@ public class Utils {
             }
             Utils.setStockStatus(context, StockTaskService.STOCK_STATUS_OK);
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "String to JSON failed: " + e);
+            e.printStackTrace();
             setStockStatus(context, StockTaskService.STOCK_STATUS_SERVER_INVALID);
         }
         return batchOperations;
@@ -123,12 +120,15 @@ public class Utils {
     }
 
     @SuppressWarnings("ResourceType")
-    public static @StockTaskService.StockStatus int getStockStatus(Context context){
+    public static
+    @StockTaskService.StockStatus
+    int getStockStatus(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         return sp.getInt(context.getString(R.string.pref_stock_status_key), StockTaskService.STOCK_STATUS_UNKNOWN);
     }
+
     //Checks if network is available or not
-    public static boolean isNetworkAvailable(Context context){
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
@@ -137,11 +137,11 @@ public class Utils {
     }
 
     //Converts Date
-    public static String convertDate(String inputDate){
+    public static String convertDate(String inputDate) {
         StringBuilder outputFormattedDate = new StringBuilder();
         outputFormattedDate.append(inputDate.substring(6))
                 .append("/")
-                .append(inputDate.substring(4,6))
+                .append(inputDate.substring(4, 6))
                 .append("/")
                 .append(inputDate.substring(2, 4));
         return outputFormattedDate.toString();

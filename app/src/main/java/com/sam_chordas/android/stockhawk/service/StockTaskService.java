@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.RemoteException;
 import android.support.annotation.IntDef;
-import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
  * and is used for the initialization and adding task as well.
  */
 public class StockTaskService extends GcmTaskService {
-    private String LOG_TAG = StockTaskService.class.getSimpleName();
 
     private OkHttpClient client = new OkHttpClient();
     private Context mContext;
@@ -62,7 +60,6 @@ public class StockTaskService extends GcmTaskService {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
@@ -124,7 +121,6 @@ public class StockTaskService extends GcmTaskService {
         urlStringBuilder.append("&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables."
                 + "org%2Falltableswithkeys&callback=");
 
-        Log.i("api", "onRunTask: " + urlStringBuilder.toString());
         String urlString;
         String getResponse;
         int result = GcmNetworkManager.RESULT_FAILURE;
@@ -143,16 +139,16 @@ public class StockTaskService extends GcmTaskService {
                                 null, null);
                     }
                     ArrayList<ContentProviderOperation> batchOperations = Utils.quoteJsonToContentVals(getResponse, mContext);
-                    if(batchOperations != null && batchOperations.size() > 0) {
+                    if (batchOperations != null && batchOperations.size() > 0) {
                         mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, batchOperations);
-                    }else{
+                    } else {
                         Intent intent = new Intent();
                         intent.setAction("com.sam_chordas.android.stockhawk.service.InvalidStockReceiver");
                         mContext.sendBroadcast(intent);
                     }
 
                 } catch (RemoteException | OperationApplicationException e) {
-                    Log.e(LOG_TAG, "Error applying batch insert", e);
+                    e.printStackTrace();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
