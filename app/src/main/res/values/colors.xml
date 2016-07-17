@@ -12,4 +12,8 @@
 
   <!-- the activated state color -->
   <color name="activated">#646464</color>
+
+  <!-- graph color -->
+  <color name="graph_dataset_color">#758cbb</color>
+  <color name="graph_thres_color">#0079ae</color>
 </resources>

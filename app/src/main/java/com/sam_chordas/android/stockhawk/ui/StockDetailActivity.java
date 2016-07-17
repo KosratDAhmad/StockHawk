@@ -109,13 +109,13 @@ public class StockDetailActivity extends AppCompatActivity implements HistoricDa
             dataset.addPoint(label, value);
         }
 
-        dataset.setColor(Color.parseColor("#758cbb"))
+        dataset.setColor(getResources().getColor(R.color.graph_dataset_color))
                 .setThickness(5)
                 .setSmooth(true)
                 .beginAt(1);
 
         Paint thresPaint = new Paint();
-        thresPaint.setColor(Color.parseColor("#0079ae"));
+        thresPaint.setColor(getResources().getColor(R.color.graph_thres_color));
         thresPaint.setStyle(Paint.Style.STROKE);
         thresPaint.setAntiAlias(true);
         thresPaint.setStrokeWidth(Tools.fromDpToPx(.75f));
