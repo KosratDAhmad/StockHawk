@@ -11,6 +11,8 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -97,7 +99,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                                     mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
                             intent.putExtra(QuoteColumns.BIDPRICE,
                                     mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE)));
-                            startActivity(intent);
+                            ActivityOptionsCompat activityOptions =
+                                    ActivityOptionsCompat.makeSceneTransitionAnimation(MyStocksActivity.this);
+                            ActivityCompat.startActivity(MyStocksActivity.this, intent, activityOptions.toBundle());
                         }
                     }
                 }));
@@ -240,7 +244,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
         ComponentName name = new ComponentName(this, DetailWidgetProvider.class);
-        int [] ids = AppWidgetManager.getInstance(this).getAppWidgetIds(name);
+        int[] ids = AppWidgetManager.getInstance(this).getAppWidgetIds(name);
 
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
