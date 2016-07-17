@@ -94,7 +94,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     @Override
                     public void onItemClick(View v, int position) {
                         if (mCursor.moveToPosition(position)) {
-                            Intent intent = new Intent(MyStocksActivity.this, StockDetail.class);
+                            Intent intent = new Intent(MyStocksActivity.this, StockDetailActivity.class);
                             intent.putExtra(QuoteColumns.SYMBOL,
                                     mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
                             intent.putExtra(QuoteColumns.BIDPRICE,

@@ -55,7 +55,7 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name=".ui.StockDetail"
+            android:name=".ui.StockDetailActivity"
             android:parentActivityName=".ui.MyStocksActivity"
             android:theme="@style/AppTheme.Details">
             <meta-data

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 /**
  * Created by kosrat on 7/14/16.
  */
-public class StockDetail extends AppCompatActivity implements HistoricData.HistoricCallback {
+public class StockDetailActivity extends AppCompatActivity implements HistoricData.HistoricCallback {
 
     HistoricData historicData;
     ArrayList<StockSymbol> stockSymbols;
