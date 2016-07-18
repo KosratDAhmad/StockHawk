@@ -1,10 +1,7 @@
 # Stock Hawk
 Stock Hawk is the third project in Udacity's Android Developer Nanodegree. The purpose of this project was to diagnose problems and practice improving apps.
 
-
-<img width="40%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_main.png" />   
-<img width="40%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_detail.png" />
-<img width="40%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_widget.png" />
+<img width="30%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_main.png" /><img width="30%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_detail.png" /><img width="30%" src="https://raw.githubusercontent.com/KosratDAhmad/StockHawk/master/art/stock_hawk_widget.png" />
 
 # License
 Copyright 2016 Kosrat D. Ahmad
