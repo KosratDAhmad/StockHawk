@@ -60,5 +60,6 @@
     <string name="change_content_description">Change </string>
     <string name="graph_content_description">Graph showing prices of the stock over time!</string>
     <string name="add_stock_content_description">Add new stock symbol</string>
+    <string name="saved_stock">This stock is already saved!</string>
 
 </resources>
